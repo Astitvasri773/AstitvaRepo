@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drill-Down Sunburst Chart</title>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/hierarchy.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+</head>
+<body>
+  <iframe width="100%" height="600px" srcdoc="
+    <html>
+    <head>
+      <script src='https://cdn.amcharts.com/lib/5/index.js'></script>
+      <script src='https://cdn.amcharts.com/lib/5/hierarchy.js'></script>
+      <script src='https://cdn.amcharts.com/lib/5/themes/Animated.js'></script>
+    </head>
+    <body>
+      <div id='chartdiv' style='width:100%;height:600px'></div>
+      <script>
+        am5.ready(function() {
+          var root = am5.Root.new('chartdiv');
+          root.setThemes([am5themes_Animated.new(root)]);
+          
+          var series = root.container.children.push(
+            am5hierarchy.Sunburst.new(root, {
+              valueField: 'value',
+              categoryField: 'name',
+              childDataField: 'children'
+            })
+          );
+          
+          // Use this to insert your dynamic JSON data in place of the placeholder
+          var data = [{"name": "root", "children": [{"name": "First", "children": [{"name": "A1", "value": 100}, {"name": "A2", "value": 60}]}]}];  // <-- Replace with your JSON data
+          series.data.setAll(data);
+          series.appear(1000, 100);
+        });
+      </script>
+    </body>
+    </html>
+  " frameborder="0"></iframe>
+</body>
+</html>

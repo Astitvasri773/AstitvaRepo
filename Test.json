@@ -1,0 +1,17 @@
+{
+  ""name"": ""Root"",
+  ""children"": [" &
+    CONCATENATEX(
+      VALUES(SunburstData[Category]),
+      "{
+        ""name"": """ & SunburstData[Category] & """,
+        ""children"": [" &
+          CONCATENATEX(
+            FILTER(SunburstData, SunburstData[Category] = EARLIER(SunburstData[Category])),
+            "{""name"": """ & SunburstData[Subcategory] & """, ""value"": " & SunburstData[Value] & "}",
+            ","
+          ) &
+        "] }",
+      ","
+    ) &
+  "] }
